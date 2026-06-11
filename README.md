@@ -1,20 +1,20 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Nikolaos Koukopoulos
+## Information Security GRC Consultant & Cyber Security Engineer
 
-# Run and deploy your AI Studio app
+An elegant, high-impact professional environment showcasing expertise in enterprise risk management, implementing ISO/IEC 27001 ISMS frameworks, vulnerability management, and secure network architectures.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/021b493b-23a7-4acb-8886-ff892c8e4151
+### Professional Core Profiles
+* **Governance, Risk & Compliance (GRC) Advisor**: Experience in designing, auditing, and maintaining Information Security Management Systems (ISMS) in alignment with ISO/IEC 27001 controls.
+* **Security Engineer**: Specializing in enterprise IT technical risk mitigation, network hardening, vulnerability assessment reporting, and proactive hotfix deployment.
+* **Regulatory Compliance**: Deep-dive gap analyses and risk advisory aligned with NIS2 directives and GDPR frameworks.
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Interactive Environment Overview
+This interactive personal hub highlights:
+* **Security Monitoring Hub**: An live-action visual representation of risk tracking, network health assessments, and remediation coordinates.
+* **Interactive Competency Spectrum**: Mapped profiles detailing core industry expertise, technical competencies, and compliance structures.
+* **Milestone Chronology**: A visual journey documenting professional achievements, military security responsibilities, and corporate engineering roles.
+* **Verified Ledger**: Publicly displayed, verifiable compliance and technical credentials—highlighting the TÜV Austria Group ISO/IEC 27001:2022 Lead Auditor status.
