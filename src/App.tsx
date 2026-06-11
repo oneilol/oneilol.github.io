@@ -315,7 +315,13 @@ export default function App() {
                 return (
                   <div 
                     key={exp.id} 
-                    onMouseEnter={() => setHoveredExperienceId(exp.id)}
+                    onMouseEnter={() => {
+                      setHoveredExperienceId(exp.id);
+                      if (!allDecrypted) {
+                        setAllDecrypted(true);
+                        triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+                      }
+                    }}
                     onMouseLeave={() => setHoveredExperienceId(null)}
                     className="relative group space-y-2 cursor-help"
                   >
@@ -411,7 +417,13 @@ export default function App() {
                   return (
                     <div 
                       key={sk.name}
-                      onMouseEnter={() => setHoveredSkillName(sk.name)}
+                      onMouseEnter={() => {
+                        setHoveredSkillName(sk.name);
+                        if (!allDecrypted) {
+                          setAllDecrypted(true);
+                          triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+                        }
+                      }}
                       onMouseLeave={() => setHoveredSkillName(null)}
                       className="p-2.5 bg-[#05070a] border border-[#141b2d] hover:border-[#00f3ff]/40 rounded-md transition-all hover:bg-[#080d16]/80 group/skill relative overflow-hidden cursor-help"
                     >
@@ -469,7 +481,13 @@ export default function App() {
                 return (
                   <div 
                     key={cert.id}
-                    onMouseEnter={() => setHoveredCertId(cert.id)}
+                    onMouseEnter={() => {
+                      setHoveredCertId(cert.id);
+                      if (!allDecrypted) {
+                        setAllDecrypted(true);
+                        triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+                      }
+                    }}
                     onMouseLeave={() => setHoveredCertId(null)}
                     className="bg-[#05070a] border border-[#141b2d]/60 hover:border-[#00f3ff]/40 p-3.5 rounded flex flex-col justify-between hover:scale-[1.01] transition-transform duration-200 group relative cursor-help"
                   >
@@ -516,7 +534,13 @@ export default function App() {
                 return (
                   <div 
                     key={edu.degree} 
-                    onMouseEnter={() => setHoveredEduDegree(edu.degree)}
+                    onMouseEnter={() => {
+                      setHoveredEduDegree(edu.degree);
+                      if (!allDecrypted) {
+                        setAllDecrypted(true);
+                        triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+                      }
+                    }}
                     onMouseLeave={() => setHoveredEduDegree(null)}
                     className="p-3 bg-[#05070a] border border-[#141b2d]/50 hover:border-[#00f3ff]/30 rounded transition-colors relative group cursor-help"
                   >
@@ -553,7 +577,13 @@ export default function App() {
 
             <div className="space-y-4 pt-1">
               <div 
-                onMouseEnter={() => setIsClearanceHovered(true)}
+                onMouseEnter={() => {
+                  setIsClearanceHovered(true);
+                  if (!allDecrypted) {
+                    setAllDecrypted(true);
+                    triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+                  }
+                }}
                 onMouseLeave={() => setIsClearanceHovered(false)}
                 className="p-3.5 bg-[#05070a] border border-[#141b2d]/50 hover:border-[#00ff66]/30 rounded transition-colors relative group cursor-help"
               >
@@ -567,7 +597,13 @@ export default function App() {
               </div>
 
               <div 
-                onMouseEnter={() => setIsInternationalHovered(true)}
+                onMouseEnter={() => {
+                  setIsInternationalHovered(true);
+                  if (!allDecrypted) {
+                    setAllDecrypted(true);
+                    triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+                  }
+                }}
                 onMouseLeave={() => setIsInternationalHovered(false)}
                 className="p-3.5 bg-[#05070a] border border-[#141b2d]/50 hover:border-[#00f3ff]/30 rounded transition-colors relative group cursor-help"
               >
@@ -599,7 +635,13 @@ export default function App() {
                 return (
                   <div 
                     key={lang.name} 
-                    onMouseEnter={() => setHoveredLangName(lang.name)}
+                    onMouseEnter={() => {
+                      setHoveredLangName(lang.name);
+                      if (!allDecrypted) {
+                        setAllDecrypted(true);
+                        triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+                      }
+                    }}
                     onMouseLeave={() => setHoveredLangName(null)}
                     className="p-3 bg-[#05070a] border border-[#141b2d]/50 hover:border-[#00f3ff]/30 rounded transition-colors relative group cursor-help"
                   >
