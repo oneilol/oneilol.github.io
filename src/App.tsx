@@ -16,11 +16,13 @@ import {
   Wifi,
   Linkedin,
   Globe,
-  Languages
+  Languages,
+  Printer
 } from 'lucide-react';
 import { personalInfo, experiences, certifications, skills, education, premiumDetails } from './data';
 import { motion, AnimatePresence } from 'motion/react';
 import SiemMonitor from './components/SiemMonitor';
+import PrintableCv from './components/PrintableCv';
 
 // Specialized Cyber Decrypt Animation Component
 function DecryptText({ text, isHovered }: { text: string; isHovered: boolean }) {
@@ -132,7 +134,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-[#b0b9c6] font-sans selection:bg-[#00f3ff]/20 selection:text-[#00f3ff] relative overflow-hidden flex flex-col justify-between">
+    <>
+      <div className="print:hidden min-h-screen bg-[#07090e] text-[#b0b9c6] font-sans selection:bg-[#00f3ff]/20 selection:text-[#00f3ff] relative overflow-hidden flex flex-col justify-between">
       
       {/* Absolute Cyber Ambient Accents */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#00f3ff]/30 to-transparent"></div>
@@ -193,12 +196,20 @@ export default function App() {
           </div>
 
           {/* Social Coordinates channels */}
-          <div className="flex items-center space-x-2 self-stretch md:self-auto pt-2 md:pt-0 border-t border-[#141b2d] md:border-0 shrink-0">
+          <div className="flex items-center space-x-2 self-stretch md:self-auto pt-2 md:pt-0 border-t border-[#141b2d] md:border-0 shrink-0 flex-wrap sm:flex-nowrap gap-1.5">
+            <button 
+              onClick={() => window.print()}
+              className="flex-1 sm:flex-initial flex items-center justify-center space-x-1.5 px-3.5 py-1.5 bg-[#1b1c0c]/85 hover:bg-[#312b15] text-xs font-mono border border-[#443c1e] rounded text-yellow-500 hover:text-yellow-400 font-semibold transition-colors cursor-pointer"
+              title="Print, download, or layout this CV for recruiters"
+            >
+              <Printer size={12} />
+              <span>Export CV</span>
+            </button>
             <a 
               href={personalInfo.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 md:flex-initial flex items-center justify-center space-x-1 px-3.5 py-1.5 bg-[#0d1324] hover:bg-[#121c32] text-xs font-mono border border-[#1a2a47] rounded text-white transition-colors"
+              className="flex-1 sm:flex-initial flex items-center justify-center space-x-1 px-3.5 py-1.5 bg-[#0d1324] hover:bg-[#121c32] text-xs font-mono border border-[#1a2a47] rounded text-white transition-colors"
             >
               <Linkedin size={12} className="text-[#00f3ff]" />
               <span>LinkedIn</span>
@@ -206,7 +217,7 @@ export default function App() {
             </a>
             <a 
               href={`mailto:${personalInfo.email}`}
-              className="flex-1 md:flex-initial flex items-center justify-center space-x-2 px-3.5 py-1.5 bg-[#0e1d1d]/95 hover:bg-[#15312f] text-xs font-mono border border-[#1e4643] rounded text-[#00ff66] transition-colors"
+              className="flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-3.5 py-1.5 bg-[#0e1d1d]/95 hover:bg-[#15312f] text-xs font-mono border border-[#1e4643] rounded text-[#00ff66] transition-colors"
             >
               <Mail size={12} />
               <span>Email</span>
@@ -615,5 +626,11 @@ export default function App() {
       </footer>
 
     </div>
+
+    {/* Printable high-fidelity plain CV */}
+    <div className="hidden print:block bg-white text-slate-900 w-full min-h-screen p-0 m-0">
+      <PrintableCv />
+    </div>
+  </>
   );
 }
