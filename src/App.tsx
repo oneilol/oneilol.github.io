@@ -86,6 +86,7 @@ function DecryptText({ text, isHovered }: { text: string; isHovered: boolean }) 
 export default function App() {
   const [copied, setCopied] = useState(false);
   const [systemAlert, setSystemAlert] = useState<string | null>(null);
+  const [allDecrypted, setAllDecrypted] = useState(false);
 
   // Hover states to trigger individual card decryption
   const [isBioHovered, setIsBioHovered] = useState(false);
@@ -198,12 +199,17 @@ export default function App() {
           {/* Social Coordinates channels */}
           <div className="flex items-center space-x-2 self-stretch md:self-auto pt-2 md:pt-0 border-t border-[#141b2d] md:border-0 shrink-0 flex-wrap sm:flex-nowrap gap-1.5">
             <button 
-              onClick={() => window.print()}
+              onClick={() => {
+                triggerAlert('LOADING PRINT SUBSYSTEM: Select "Save as PDF" to download the high-fidelity CV');
+                setTimeout(() => {
+                  window.print();
+                }, 800);
+              }}
               className="flex-1 sm:flex-initial flex items-center justify-center space-x-1.5 px-3.5 py-1.5 bg-[#1b1c0c]/85 hover:bg-[#312b15] text-xs font-mono border border-[#443c1e] rounded text-yellow-500 hover:text-yellow-400 font-semibold transition-colors cursor-pointer"
-              title="Print, download, or layout this CV for recruiters"
+              title="Export, download, or print this premium CV layout"
             >
               <Printer size={12} />
-              <span>Export CV</span>
+              <span>Export PDF / Print</span>
             </button>
             <a 
               href={personalInfo.linkedinUrl}
@@ -231,7 +237,13 @@ export default function App() {
           
           {/* Executive Overview dossier */}
           <div 
-            onMouseEnter={() => setIsBioHovered(true)}
+            onMouseEnter={() => {
+              setIsBioHovered(true);
+              if (!allDecrypted) {
+                setAllDecrypted(true);
+                triggerAlert('SYSTEM DECRYPTION LOCK DISENGAGED: UNRESTRICTED DOSSIER ACCESS GRANTED');
+              }
+            }}
             onMouseLeave={() => setIsBioHovered(false)}
             className="md:col-span-8 border border-[#141b2d] bg-[#080b11]/80 rounded-lg p-5 flex flex-col justify-between backdrop-blur-xs group transition-all hover:border-[#00f3ff]/30 cursor-help"
           >
@@ -239,11 +251,11 @@ export default function App() {
               <div className="flex items-center justify-between font-mono text-[10px] text-[#55658e] tracking-wider uppercase border-b border-[#141b2d] pb-2">
                 <span>[ dossier segment #01 — summary ]</span>
                 <span className="text-[#00f3ff] animate-pulse group-hover:text-[#00ff66]">
-                  {isBioHovered ? '● DECRYPTED' : '⛑ HOVER TO DECRYPT'}
+                  {(isBioHovered || allDecrypted) ? '● DECRYPTED' : '⛑ HOVER TO DECRYPT'}
                 </span>
               </div>
               <p className="text-sm leading-relaxed text-zinc-300 font-sans min-h-[60px]">
-                <DecryptText text={personalInfo.bio} isHovered={isBioHovered} />
+                <DecryptText text={personalInfo.bio} isHovered={isBioHovered || allDecrypted} />
               </p>
             </div>
           </div>
@@ -333,7 +345,7 @@ export default function App() {
                       {exp.highlights.map((h, i) => (
                         <li key={i} className="flex items-start text-xs text-zinc-400 font-mono leading-relaxed transition-colors group-hover:text-zinc-200">
                           <ChevronRight size={13} className="text-zinc-600 shrink-0 mt-0.5" />
-                          <DecryptText text={h} isHovered={isHovered} />
+                          <DecryptText text={h} isHovered={isHovered || allDecrypted} />
                         </li>
                       ))}
                     </ul>
@@ -419,7 +431,7 @@ export default function App() {
                           </span>
                           
                           <span className={`font-semibold ${statusColor} px-1.5 py-0.5 rounded ${bgAccent} uppercase tracking-wider`}>
-                            <DecryptText text={proficiency} isHovered={isHovered} />
+                            <DecryptText text={proficiency} isHovered={isHovered || allDecrypted} />
                           </span>
                         </div>
                       </div>
@@ -473,7 +485,7 @@ export default function App() {
                         {cert.name}
                       </h4>
                       <p className="text-[10px] text-zinc-500 leading-relaxed min-h-[44px]">
-                        {cert.description && <DecryptText text={cert.description} isHovered={isHovered} />}
+                        {cert.description && <DecryptText text={cert.description} isHovered={isHovered || allDecrypted} />}
                       </p>
                     </div>
 
@@ -514,7 +526,7 @@ export default function App() {
                     </h4>
                     <p className="text-[10px] font-mono text-[#00ff66] mt-0.5">{edu.institution}</p>
                     <div className="text-[10px] text-zinc-500 mt-2 font-mono min-h-[30px] leading-relaxed">
-                      {edu.details && <DecryptText text={edu.details} isHovered={isHovered} />}
+                      {edu.details && <DecryptText text={edu.details} isHovered={isHovered || allDecrypted} />}
                     </div>
                   </div>
                 );
@@ -550,7 +562,7 @@ export default function App() {
                   MILITARY SERVICE & ACTIVE DEPLOYMENT SECURITY POSTURE
                 </div>
                 <p className="text-[11px] text-zinc-400 font-sans leading-relaxed">
-                  <DecryptText text={premiumDetails.clearance} isHovered={isClearanceHovered} />
+                  <DecryptText text={premiumDetails.clearance} isHovered={isClearanceHovered || allDecrypted} />
                 </p>
               </div>
 
@@ -564,7 +576,7 @@ export default function App() {
                   INTERNATIONAL MULTICULTURAL ADAPTABILITY
                 </div>
                 <p className="text-[11px] text-zinc-400 font-sans leading-relaxed">
-                  <DecryptText text={premiumDetails.international} isHovered={isInternationalHovered} />
+                  <DecryptText text={premiumDetails.international} isHovered={isInternationalHovered || allDecrypted} />
                 </p>
               </div>
             </div>
@@ -595,7 +607,7 @@ export default function App() {
                       {lang.name}
                     </h4>
                     <p className="text-[10px] text-zinc-400 mt-1.5 font-sans leading-relaxed">
-                      <DecryptText text={lang.level} isHovered={isHovered} />
+                      <DecryptText text={lang.level} isHovered={isHovered || allDecrypted} />
                     </p>
                   </div>
                 );
