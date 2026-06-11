@@ -1,0 +1,6 @@
+{
+  "name": "nksec Portfolio",
+  "description": "Personal portfolio of Nikolaos Koukopoulos - IS GRC Consultant & Cyber Security Engineer based in Athens, Greece.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
