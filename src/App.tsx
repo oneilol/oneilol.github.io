@@ -100,6 +100,7 @@ export default function App() {
 
   // Skill category filter state
   const [selectedSkillCategory, setSelectedSkillCategory] = useState<'all' | 'grc' | 'tech' | 'tools'>('all');
+  const [showAllSkills, setShowAllSkills] = useState(false);
 
   // Contact payload state
   const [visitorName, setVisitorName] = useState('');
@@ -390,9 +391,12 @@ export default function App() {
 
             {/* Professional competency capsules */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
-              {skills
-                .filter(sk => selectedSkillCategory === 'all' || sk.category === selectedSkillCategory)
-                .map((sk) => {
+              {(() => {
+                const filteredCats = skills.filter(sk => selectedSkillCategory === 'all' || sk.category === selectedSkillCategory);
+                const sortedByRating = [...filteredCats].sort((a, b) => b.percentage - a.percentage);
+                const displayed = showAllSkills ? sortedByRating : sortedByRating.slice(0, 6);
+                
+                return displayed.map((sk) => {
                   const isHovered = hoveredSkillName === sk.name;
                   let proficiency = "Specialist Core";
                   let statusColor = "text-[#00f3ff]";
@@ -449,8 +453,37 @@ export default function App() {
                       </div>
                     </div>
                   );
-                })}
+                });
+              })()}
             </div>
+
+            {/* Expander control interface */}
+            {(() => {
+              const count = skills.filter(sk => selectedSkillCategory === 'all' || sk.category === selectedSkillCategory).length;
+              if (count <= 6) return null;
+              return (
+                <div className="flex flex-col sm:flex-row justify-between items-center pt-2 gap-2">
+                  <span className="font-mono text-[8px] text-[#55658e] uppercase tracking-wide">
+                    {showAllSkills 
+                      ? `[ STATUS: DECRYPTED ALL ${count} SKILLS ]` 
+                      : `[ STATUS: SHOWING TOP 6 OF ${count} CORE SKILLS ]`
+                    }
+                  </span>
+                  <button
+                    onClick={() => {
+                      setShowAllSkills(!showAllSkills);
+                      triggerAlert(showAllSkills ? 'Skills database viewport consolidated.' : 'Full skills database decrypted and loaded.');
+                    }}
+                    className="w-full sm:w-auto px-4 py-1.5 bg-[#0a0f1d] hover:bg-[#111930] text-zinc-300 hover:text-[#00f3ff] text-[9px] font-mono border border-[#162744] hover:border-[#1e345e] rounded transition-all duration-200 cursor-pointer flex items-center justify-center space-x-1.5"
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${showAllSkills ? 'bg-[#00ff66]' : 'bg-[#00f3ff] animate-pulse'}`} />
+                    <span>
+                      {showAllSkills ? 'CONSOLIDATE VIEW' : `DECRYPT ALL ${count} CORES`}
+                    </span>
+                  </button>
+                </div>
+              );
+            })()}
           </div>
 
           <div className="pt-3 border-t border-[#141b2d] flex justify-between font-mono text-[9px] text-zinc-500">
